@@ -1,0 +1,25 @@
+.width-180 {
+    width: 180px;
+}
+
+.font-size-10 {
+    font-size: 10pt;
+}
+
+.size-30{
+    height: 30px;
+    width: 30px;
+}
+
+.switch input[type=checkbox]:checked,
+.switch input[type=checkbox][aria-checked=true] {  
+    background-color: var(--tw-primary);
+}
+
+.switch input[type=checkbox] {
+    background-color: var(--tw-gray-300);
+}
+
+.select {
+    border: 1px solid var(--tw-gray-300) !important;
+}

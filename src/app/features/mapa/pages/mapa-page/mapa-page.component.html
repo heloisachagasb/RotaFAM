@@ -1,0 +1,53 @@
+<div class="card h-full">
+    <div class="card-header">
+            <h3 class="card-title fs-5 fw-bold mb-0">
+                <i class="ki-outline ki-route"></i>
+                Como chegar
+            </h3>
+    </div>
+    
+    <div class="card-body p-6">
+        <div class="mb-5">
+            <label class="form-label mb-2">Origem</label>
+            <ng-select
+                class="w-full"
+                [items]="locaisMapa"
+                bindLabel="nome"
+                bindValue="id"
+                groupBy="grupo"
+                placeholder="Selecione um local..."
+                [(ngModel)]="localSelecionado"
+                [searchable]="true"
+                [clearable]="false">
+            </ng-select>
+        </div>
+
+        <div class="mb-0">
+            <label class="form-label mb-2">Destino</label>
+            <ng-select
+                class="w-full"
+                [items]="locaisMapa"
+                bindLabel="nome"
+                bindValue="id"
+                groupBy="grupo"
+                placeholder="Selecione um local..."
+                [(ngModel)]="localSelecionado"
+                [searchable]="true"
+                [clearable]="false">
+            </ng-select>
+        </div>
+    </div>
+</div>
+
+<div class="card h-full mt-6">
+    <div class="card-header">
+            <h3 class="card-title fs-5 fw-bold mb-0">
+                <i class="ki-outline ki-questionnaire-tablet"></i>
+                Instruções
+            </h3>
+    </div>
+    
+    <div class="card-body p-6">
+      
+    </div>
+</div>

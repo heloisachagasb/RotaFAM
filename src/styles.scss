@@ -1,0 +1,225 @@
+@use "@angular/material" as mat;
+/* You can add global styles to this file, and also import other style files */
+
+// Main style
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Demos */
+@import "./metronic/css/demos/demo1.css";
+
+// Keenicons
+@import "./metronic/vendors/keenicons/duotone/style.css";
+@import "./metronic/vendors/keenicons/filled/style.css";
+@import "./metronic/vendors/keenicons/outline/style.css";
+@import "./metronic/vendors/keenicons/solid/style.css";
+
+// Tabler Icons
+@import "@tabler/icons-webfont/dist/tabler-icons.min.css";
+
+@import "ngx-toastr/toastr";
+
+.ng-select .ng-select-container {
+  @apply select select-sm cursor-pointer;
+}
+
+@layer components {
+  .ng-select {
+    padding: 0;
+  }
+
+  .dark .ng-select {
+    color: var(--tw-gray-700);
+  }
+
+  .ng-select.ng-select-single
+    .ng-select-container
+    .ng-value-container
+    .ng-input,
+  .ng-select .ng-select-container .ng-value-container .ng-input > input {
+    height: 100%;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+  }
+
+  .ng-select input,
+  .ng-select span {
+    &::placeholder {
+      @apply text-gray-500;
+    }
+
+    &:hover {
+      @apply border-gray-400;
+    }
+  }
+
+  /* Seleciona o dropdown do ng-select e aplica estilos semelhantes ao seu select atual */
+  .ng-select .ng-dropdown-panel {
+    width: auto !important;
+    max-width: 550px;
+    @apply bg-[#fff] border border-[#DBDFE9] text-gray-700 rounded shadow-lg;
+  }
+
+  .ng-select .ng-dropdown-panel .ng-optgroup-label {
+    padding-left: 0.5rem !important;
+    font-weight: 600;
+  }
+
+  .ng-select .ng-dropdown-panel .ng-option {
+    @apply cursor-pointer py-2 px-3;
+  }
+
+  .ng-select .ng-dropdown-panel .ng-option .ng-option-label {
+    padding-left: 0.75rem !important;
+  }
+
+  .ng-select .ng-option:hover {
+    @apply bg-[#3F6ADE] text-white;
+  }
+  .ng-select .ng-option:hover .ng-option-label {
+    @apply bg-[#3F6ADE] text-white;
+  }
+
+  .ng-select .ng-option.selected,
+  .ng-select .ng-option.ng-option-selected,
+  .dark .ng-select .ng-option.selected,
+  .dark .ng-select .ng-option.ng-option-selected {
+    @apply bg-[#2563eb] text-white;
+
+    &:hover {
+      @apply bg-[#3052af] text-white;
+    }
+  }
+
+  .dark .ng-select .ng-select-container {
+    @apply bg-[#1F212A]  text-gray-700 rounded leading-tight focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500;
+  }
+
+  .dark .ng-dropdown-panel {
+    @apply bg-[#1F212A] border-gray-700 text-gray-700;
+  }
+  .ng-select.ng-select-single .ng-select-container .ng-value-container,
+  .ng-select.ng-select-single
+    .ng-select-container
+    .ng-value-container
+    .ng-value {
+    align-items: center;
+  }
+}
+
+.loadingio-spinner-rolling-bnlx88cuy5p {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+}
+
+.ldio-crlqeyojh5g {
+  width: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0;
+}
+
+.ldio-crlqeyojh5g div {
+  box-sizing: content-box;
+}
+
+.mat-mdc-row {
+  -webkit-font-smoothing: unset !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: unset !important;
+  height: unset !important;
+}
+
+th {
+  background-color: var(--tw-table-head-background-color) !important;
+  color: var(--tw-gray-600) !important;
+}
+
+.switch input[type=checkbox]:checked,
+.switch input[type=checkbox][aria-checked="true"] {
+  background-color: var(--tw-danger) !important;
+}
+
+.imagem-logo-banco {
+  width: 15px;
+  border-radius: 25%;
+}
+
+.checkbox[type=checkbox] {
+  height: 1rem;
+  width: 1rem;
+}
+
+.radio[type=radio]:checked {
+  background-color: var(--tw-danger);
+  border: 1px solid var(--tw-danger);
+}
+
+.checkbox[type=checkbox]:focus {
+  border-color: var(--tw-danger) !important;
+}
+
+.checkbox[type=checkbox]:checked {
+  background-color: var(--tw-danger) !important;
+  border: 1px solid var(--tw-danger) !important;
+}
+
+.page-bg {
+  background-image: url("assets/media/images/2600x1200/bg-7.png");
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  /* Força o background do seu tema (ex.: #121212 ou qualquer cor que esteja usando) */
+  -webkit-box-shadow: 0 0 0 30px #1f212a inset !important;
+  box-shadow: 0 0 0 30px #1f212a inset !important;
+
+  /* Define a cor do texto dentro do campo */
+  -webkit-text-fill-color: #9a9cae !important;
+}
+
+@include mat.core();
+
+/* estilo para os componentes do angular material */
+
+$my-primary: mat.define-palette(mat.$indigo-palette, 500);
+$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+    ),
+    typography:
+      mat.define-typography-config(
+        (
+          font-family: "Inter, system-ui, sans-serif",
+          font-weight: 400,
+          font-size: 13px,
+          line-height: 14px,
+          letter-spacing: 0,
+          font-style: normal,
+        )
+      ),
+    density: (
+      compact: (
+        line-height: 1.5,
+        padding: 4px 8px,
+      ),
+      comfortable: (
+        line-height: 1.75,
+        padding: 8px 16px,
+      ),
+    ),
+  )
+);
+
+@include mat.tooltip-theme($my-theme);

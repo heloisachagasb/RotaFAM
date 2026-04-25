@@ -1,0 +1,18 @@
+:host ::ng-deep .ng-select .ng-dropdown-panel .ng-option {
+  padding-left: 0.75rem;
+}
+
+:host ::ng-deep .ng-select .ng-optgroup-label {
+  padding-left: 0.5rem !important;
+  font-weight: 600;
+}
+
+:host ::ng-deep .ng-select .ng-option .ng-option-label {
+  padding-left: 0.25rem;
+}
+
+.select {
+    border-radius: 0rem !important;
+    height: 0rem !important; 
+    border: none !important; 
+}

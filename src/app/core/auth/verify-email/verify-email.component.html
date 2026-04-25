@@ -1,0 +1,28 @@
+<div class="flex items-center justify-center grow bg-center bg-no-repeat page-bg w-[370px]">
+    <div class="card-dark max-w-[440px] w-full card-escuro">
+        <div class="card-body-dark p-10">
+            <div class="flex justify-center py-10">
+                <img alt="image" class="max-h-[130px]" src="assets/media/illustrations/30-dark.svg" />
+            </div>
+            <h3 class="text-lg font-semibold text-white text-center mb-3">
+                Verifique seu e-mail
+            </h3>
+            <div class="text-2sm text-center text-gray-400 mb-7.5">
+                Redefinição de senha enviado para o seu e-mail.
+            </div>
+            <div class="flex justify-center mb-5">
+                <a class="btn btn-primary flex justify-center font-semibold" (click)="voltarLogin()">
+                    Voltar
+                </a>
+            </div>
+            <div class="flex items-center justify-center gap-1">
+                <span class="text-xs text-gray-300">
+                   Não recebeu o e-mail?
+                </span>
+                <a class="text-xs font-semibold link cursor-pointer" (click)="reenviarEmail()">
+                    Reenviar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

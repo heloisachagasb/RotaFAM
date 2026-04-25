@@ -1,0 +1,29 @@
+# Node.js with Grunt
+# Build a Node.js project using the Grunt task runner.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- main
+
+steps:
+  - checkout: self
+  - task: Npm@0
+    displayName: npm install
+    inputs:
+      arguments: --force
+  - task: Npm@1
+    displayName: Build
+    continueOnError: True
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: 'run build-prod --aot --output-hashing=all '
+  - task: ArchiveFiles@2
+    displayName: 'Archive '
+    inputs:
+      rootFolderOrFile: dist/rotaFam
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish artifacts: drop'
+    inputs:
+      TargetPath: '\\my\share\$(Build.DefinitionName)\$(Build.BuildNumber)'
