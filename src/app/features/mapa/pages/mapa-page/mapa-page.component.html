@@ -1,38 +1,24 @@
 <div class="card h-full">
     <div class="card-header">
-            <h3 class="card-title fs-5 fw-bold mb-0">
-                <i class="ki-outline ki-route"></i>
-                Como chegar
-            </h3>
+        <h3 class="card-title fs-5 fw-bold mb-0">
+            <i class="ki-outline ki-route"></i>
+            Como chegar
+        </h3>
     </div>
-    
+
     <div class="card-body p-6">
         <div class="mb-5">
             <label class="form-label mb-2">Origem</label>
-            <ng-select
-                class="w-full"
-                [items]="locaisMapa"
-                bindLabel="nome"
-                bindValue="id"
-                groupBy="grupo"
-                placeholder="Selecione um local..."
-                [(ngModel)]="localSelecionado"
-                [searchable]="true"
+            <ng-select class="w-full" [items]="locaisMapa" bindLabel="nome" bindValue="id" groupBy="grupo"
+                placeholder="Selecione um local..." [(ngModel)]="localSelecionado" [searchable]="true"
                 [clearable]="false">
             </ng-select>
         </div>
 
         <div class="mb-0">
             <label class="form-label mb-2">Destino</label>
-            <ng-select
-                class="w-full"
-                [items]="locaisMapa"
-                bindLabel="nome"
-                bindValue="id"
-                groupBy="grupo"
-                placeholder="Selecione um local..."
-                [(ngModel)]="localSelecionado"
-                [searchable]="true"
+            <ng-select class="w-full" [items]="locaisMapa" bindLabel="nome" bindValue="id" groupBy="grupo"
+                placeholder="Selecione um local..." [(ngModel)]="localSelecionado" [searchable]="true"
                 [clearable]="false">
             </ng-select>
         </div>
@@ -41,13 +27,369 @@
 
 <div class="card h-full mt-6">
     <div class="card-header">
-            <h3 class="card-title fs-5 fw-bold mb-0">
-                <i class="ki-outline ki-questionnaire-tablet"></i>
-                Instruções
-            </h3>
+        <h3 class="card-title fs-5 fw-bold mb-0">
+            <i class="ki-outline ki-questionnaire-tablet"></i>
+            Instruções
+        </h3>
     </div>
-    
+
     <div class="card-body p-6">
-      
+        <label class="form-label">Selecione origem e destino para ver as instruções passo a passo.</label>
+    </div>
+</div>
+
+<div class="card h-full mt-6">
+    <div class="card-header">
+        <h3 class="card-title fs-5 fw-bold mb-0">
+            <i class="ki-outline ki-abstract-29"></i>
+            Legenda
+        </h3>
+    </div>
+
+    <div class="card-body p-6">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px;">
+
+            <!-- Coluna 1 -->
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <i class="ki-solid ki-coffee"></i>
+                </div>
+                <span class="form-label text-gray-900">Cafeteria</span>
+            </div>
+
+            <!-- Coluna 2 - Item 1 -->
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-dark-blue" style="position: relative;">
+                    <span class="text-sm">B1</span>
+                </div>
+                <span class="form-label text-gray-900">Bloco 1</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <i class="ki-solid ki-chart-simple-2"></i>
+                </div>
+                <span class="form-label text-gray-900">Escada</span>
+            </div>
+
+            <!-- Coluna 2 - Item 2 -->
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-red" style="position: relative;">
+                    <span class="text-sm">B2</span>
+                </div>
+                <span class="form-label text-gray-900">Bloco 2</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <i class="ki-solid ki-pulse"></i>
+                </div>
+                <span class="form-label text-gray-900">Ambulatório</span>
+            </div>
+
+            <!-- Coluna 2 vazia (célula placeholder) -->
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-green" style="position: relative;">
+                    <span class="text-sm">B3</span>
+                </div>
+                <span class="form-label text-gray-900">Bloco 3</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <span class="text-sm">P1</span>
+                </div>
+                <span class="form-label text-gray-900">Portaria 1</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-light-blue" style="position: relative;">
+                    <span class="text-sm">B4</span>
+                </div>
+                <span class="form-label text-gray-900">Bloco 4</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <span class="text-sm">P2</span>
+                </div>
+                <span class="form-label text-gray-900">Portaria 2</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-purple" style="position: relative;">
+                    <span class="text-sm">B5</span>
+                </div>
+                <span class="form-label text-gray-900">Bloco 5</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <span class="text-sm">P3</span>
+                </div>
+                <span class="form-label text-gray-900">Portaria 3</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-pink" style="position: relative;">
+                    <span class="text-sm">B6</span>
+                </div>
+                <span class="form-label text-gray-900">Bloco 6</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <span class="text-sm">P4</span>
+                </div>
+                <span class="form-label text-gray-900">Portaria 4</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <span class="text-sm">E</span>
+                </div>
+                <span class="form-label text-gray-900">Estacionamento</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <span class="text-sm">P5</span>
+                </div>
+                <span class="form-label text-gray-900">Portaria 5</span>
+            </div>
+
+            <div></div>
+
+        </div>
+    </div>
+</div>
+
+<div class="card h-full mt-6">
+    <div class="p-5">
+       <div class="map-area">
+            <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;"
+                xmlns="http://www.w3.org/2000/svg">
+
+                <!-- Linhas estacionamento -->
+                <line x1="1125" y1="20" x2="1125" y2="720" stroke="black" stroke-width="2.5" />
+                <line x1="1050" y1="255" x2="1125" y2="255" stroke="black" stroke-width="2.5" />
+
+                <!-- Linhas B1 (P1) -->
+                <line x1="30" y1="500" x2="250" y2="500" stroke="black" stroke-width="2.5" />
+                <line x1="80" y1="470" x2="100" y2="470" stroke="black" stroke-width="2.5" />
+                <line x1="80" y1="525" x2="100" y2="525" stroke="black" stroke-width="2.5" />
+                <line x1="80" y1="564" x2="100" y2="564" stroke="black" stroke-width="2.5" />
+                <line x1="75" y1="480" x2="75" y2="520" stroke="black" stroke-width="2.5" />
+
+                <!-- Linha B1 salas -> P2 -->
+                <line x1="167" y1="560" x2="167" y2="620" stroke="black" stroke-width="2.5" />
+
+                <!-- Linhas B1 NICOM -> direcao academica -->
+                <line x1="321" y1="591" x2="351" y2="591" stroke="black" stroke-width="2.5" />
+                <line x1="351" y1="591" x2="351" y2="650" stroke="black" stroke-width="2.5" />
+
+                <!-- Circulo preto conectado ao B2 -->
+                <circle cx="930" cy="700" r="15" fill="black" />
+
+                <!-- Linhas B2 -->
+                <line x1="750" y1="570" x2="1070" y2="570" stroke="#B91C1C" stroke-width="2.5" />
+                <line x1="815" y1="560" x2="815" y2="600" stroke="#B91C1C" stroke-width="2.5" />
+                <line x1="895" y1="560" x2="895" y2="600" stroke="#B91C1C" stroke-width="2.5" />
+                <line x1="975" y1="560" x2="975" y2="600" stroke="#B91C1C" stroke-width="2.5" />
+                <line x1="1065" y1="560" x2="1065" y2="600" stroke="#B91C1C" stroke-width="2.5" />
+
+                <!-- Linha B2 -> circulo preto -->
+                <line x1="930" y1="633" x2="930" y2="700" stroke="black" stroke-width="2.5" />
+
+                <!-- Linhas B3 -->
+                <line x1="287" y1="255" x2="1050" y2="255" stroke="#22C55E" stroke-width="2.5" />
+                <line x1="364" y1="240" x2="364" y2="300" stroke="#22C55E" stroke-width="2.5" />
+                <line x1="574" y1="240" x2="574" y2="300" stroke="#22C55E" stroke-width="2.5" />
+                <line x1="734" y1="240" x2="734" y2="300" stroke="#22C55E" stroke-width="2.5" />
+                <line x1="1046" y1="240" x2="1046" y2="300" stroke="#22C55E" stroke-width="2.5" />
+
+                <!-- Linhas NICOM -> B6/B5/B4 -->
+                <line x1="303" y1="340" x2="303" y2="596" stroke="black" stroke-width="2.5" />
+                <line x1="280" y1="340" x2="303" y2="340" stroke="black" stroke-width="2.5" />
+                <line x1="303" y1="380" x2="340" y2="380" stroke="black" stroke-width="2.5" />
+                <line x1="303" y1="420" x2="340" y2="420" stroke="black" stroke-width="2.5" />
+                <line x1="303" y1="470" x2="340" y2="470" stroke="black" stroke-width="2.5" />
+                <line x1="383" y1="616" x2="412" y2="616" stroke="black" stroke-width="2.5" />
+                <line x1="384" y1="570" x2="384" y2="615" stroke="black" stroke-width="2.5" />
+                <line x1="302" y1="559" x2="412" y2="559" stroke="black" stroke-width="2.5" />
+
+                <!-- Esportes -->
+                <line x1="590" y1="20" x2="590" y2="254" stroke="black" stroke-width="2.5" />
+                <line x1="298" y1="65" x2="298" y2="165" stroke="black" stroke-width="2.5" />
+                <line x1="280" y1="65" x2="299" y2="65" stroke="black" stroke-width="2.5" />
+                <line x1="280" y1="115" x2="590" y2="115" stroke="black" stroke-width="2.5" />
+                <line x1="190" y1="165" x2="310" y2="165" stroke="black" stroke-width="2.5" />
+                <line x1="590" y1="75" x2="660" y2="75" stroke="black" stroke-width="2.5" />
+                <line x1="590" y1="175" x2="1000" y2="175" stroke="black" stroke-width="2.5" />
+            </svg>
+
+            <!-- ============================================================ -->
+            <!-- ICONES                                                    -->
+            <!-- ============================================================ -->
+
+            <!-- Bloco 1 - Cima (P1) (Escada) -->
+            <div class="inode inode-white" style="top:458px;left:62px;"><i class="ki-solid ki-chart-simple-2"></i></div>
+            <!-- Bloco 1 - Baixo (P1) (Escada) -->
+            <div class="inode inode-white" style="top:510px;left:62px;"><i class="ki-solid ki-chart-simple-2"></i></div>
+            <!-- Bloco 1 - Corredor (NICOM -> DIRECAO ACADEMICA) (Escada) -->
+            <div class="inode inode-white" style="top:577px;left:335px;z-index:1;"><i
+                    class="ki-solid ki-chart-simple-2"></i></div>
+            <!-- Bloco 1 - Corredor (P2) (Cafeteria) -->
+            <div class="inode inode-white" style="top:551px;left:62px;"><i class="ki-solid ki-coffee"></i></div>
+
+            <!-- Bloco 2 - Corredor (Escada) -->
+            <div class="inode inode-white" style="top:545px;left:370px;"><i class="ki-solid ki-chart-simple-2"></i>
+            </div>
+            <!-- Bloco 2 - Esquerda (Escada) -->
+            <div class="inode inode-white" style="top:555px;left:800px;"><i class="ki-solid ki-chart-simple-2"></i>
+            </div>
+            <!-- Bloco 2 - Centro (Cafeteria) -->
+            <div class="inode inode-white" style="top:555px;left:880px;"><i class="ki-solid ki-coffee"></i>
+            </div>
+            <!-- Bloco 2 - Centro (Escada) -->
+            <div class="inode inode-white" style="top:555px;left:960px;"><i class="ki-solid ki-chart-simple-2"></i>
+            </div>
+            <!-- Bloco 2 - Direita (Escada) -->
+            <div class="inode inode-white" style="top:555px;left:1050px;"><i class="ki-solid ki-chart-simple-2"></i>
+            </div>
+
+            <!-- Bloco 3 - Esquerda (Escada) -->
+            <div class="inode inode-white" style="top:241px;left:560px;"><i class="ki-solid ki-chart-simple-2"></i>
+            </div>
+            <!-- Bloco 3 - Enfermaria -->
+            <div class="inode inode-white" style="top:240px;left:350px;"><i class="ki-solid ki-pulse"></i></div>
+            <!-- Bloco 3 - Centro (Escada) -->
+            <div class="inode inode-white" style="top:241px;left:720px;"><i class="ki-solid ki-chart-simple-2"></i>
+            </div>
+            <!-- Bloco 3 - Direita (Escada) -->
+            <div class="inode inode-white" style="top:241px;left:1032px;"><i class="ki-solid ki-chart-simple-2"></i>
+            </div>
+
+            <!-- Bloco 5/6 - Corredor (Escada) -->
+            <div class="inode inode-white" style="top:510px;left:290px;"><i class="ki-solid ki-chart-simple-2"></i>
+            </div>
+            <!-- Bloco 6 - Praca academica (Cafeteria) -->
+            <div class="inode inode-white" style="top:365px;left:625px;z-index:90;"><i class="ki-solid ki-coffee"></i>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- BLOCOS                                                       -->
+            <!-- ============================================================ -->
+
+            <!--BLOCO 1-->
+            <div class="circ"
+                style="width:36px;height:36px;top:350px;left:175px;background:#11285F;color:white;font-size:12px;border-color:#11285F;z-index:1;">
+                B1</div>
+            <div class="circ" style="width:34px;height:34px;top:483px;left:30px;font-size:12px;">P1</div>
+            <div class="blk" style="top:390px;left:100px;width:90px;height:175px;font-size:13px;border-color:#11285F;">
+                SALAS</div>
+            <div class="blk"
+                style="top:390px;left:192px;width:95px;height:175px;background:white;color:black;font-size:11px;font-weight:700;border-color:#11285F;">
+                ÁREA DE CONVIVÊNCIA</div>
+            <div class="blk"
+                style="top:578px;left:193px;width:128px;height:54px;font-size:11px;font-weight:700;flex-direction:column;gap:2px;border-color:#11285F;">
+                <span>NICOM</span>
+            </div>
+            <div class="blk" style="top:650px;left:310px;width:82px;height:52px;font-size:10px;border-color:#11285F;">
+                DIREÇÃO ACADÊMICA
+            </div>
+            <div class="blk" style="top:650px;left:396px;width:82px;height:52px;font-size:10px;border-color:#11285F;">
+                NÚCLEO EAD</div>
+            <div class="blk" style="top:650px;left:482px;width:68px;height:52px;font-size:11px;border-color:#11285F;">
+                CPA</div>
+            <div class="blk" style="top:650px;left:554px;width:78px;height:52px;font-size:11px;border-color:#11285F;">
+                DIPLOMA</div>
+            <div class="circ" style="width:34px;height:34px;top:600px;left:150px;font-size:12px;">P2</div>
+
+            <!--BLOCO 2-->
+            <div class="circ"
+                style="width:36px;height:36px;top:640px;left:800px;background:#b91c1c;color:white;font-size:12px;border-color:#b91c1c;z-index:1;">
+                B2</div>
+            <div class="blk" style="top:550px;left:412px;width:344px;height:38px;font-size:10px;border-color:#B91C1C;">
+                NÚCLEO DE PRÁTICAS JURÍDICAS E SALAS
+            </div>
+            <div class="blk" style="top:596px;left:412px;width:686px;height:38px;font-size:10px;border-color:#B91C1C;">
+                TRIBUNAL DO JÚRI E SALAS
+            </div>
+
+            <!--BLOCO 3-->
+            <div class="circ"
+                style="width:36px;height:36px;top:235px;left:660px;background:#22c55e;color:white;font-size:12px;border-color:#22c55e;z-index:1;">
+                B3</div>
+            <div class="blk" style="top:240px;left:430px;width:90px;height:40px;font-size:10px;border-color:#22c55e;">
+                COORD. LABS.</div>
+            <div class="blk" style="top:278px;left:290px;width:805px;height:38px;font-size:10px;border-color:#22c55e;">
+                SALAS
+            </div>
+
+            <!--BLOCO 4-->
+            <div class="circ"
+                style="width:36px;height:36px;top:280px;left:200px;background:#3B82F6;color:white;font-size:12px;border-color:#3B82F6;z-index:1;">
+                B4</div>
+            <div class="blk"
+                style="top:220px;left:242px;width:45px;height:160px;background:white;color:black;font-size:11px;font-weight:700;border-color:#3B82F6;">
+                SALAS</div>
+
+            <!--BLOCO 5-->
+            <div class="circ"
+                style="width:36px;height:36px;top:320px;left:460px;background:#582aa8;color:white;font-size:12px;border-color:#582aa8;z-index:1;">
+                B5</div>
+            <div class="blk" style="top:360px;left:340px;width:280px;height:34px;border-color:#582aa8;">SALAS</div>
+            <div class="blk" style="top:397px;left:340px;width:95px;height:46px;border-color:#582aa8;">SALA VIP</div>
+            <div class="blk" style="top:397px;left:440px;width:100px;height:46px;border-color:#582aa8;">SECRETÁRIA</div>
+            <div class="blk" style="top:397px;left:545px;width:90px;height:46px;border-color:#582aa8;">CFA</div>
+
+            <!--BLOCO 6-->
+            <div class="circ"
+                style="width:36px;height:36px;top:500px;left:700px;background:#E91E8C;color:white;font-size:12px;border-color:#E91E8C;z-index:1;">
+                B6</div>
+            <div class="blk"
+                style="top:446px;left:340px;width:95px;height:46px;font-size:10px;background:white;border-color:#E91E8C;color:black;">
+                SALA DOS PROFESSORES
+            </div>
+            <div class="blk" style="top:446px;left:440px;width:100px;height:46px;font-size:10px;border-color:#E91E8C;">
+                SALA DOS COORDENADORES</div>
+            <div class="blk" style="top:446px;left:545px;width:90px;height:46px;font-size:10px;border-color:#E91E8C;">
+                DEPARTAMENTO SOCIAL</div>
+            <div class="blk" style="top:360px;left:638px;width:150px;height:132px;font-size:13px;font-weight:900;">
+                PRAÇA ACADÊMICA</div>
+            <div class="blk" style="top:397px;left:791px;width:147px;height:46px;font-size:10px;border-color:#E91E8C;">
+                BIBLIOTECA E SALAS DE ESTUDO</div>
+            <div class="blk" style="top:397px;left:942px;width:148px;height:46px;font-size:10px;border-color:#E91E8C;">
+                AUDITÓRIO JAMIL SALOMÃO</div>
+            <div class="blk"
+                style="top:446px;left:791px;width:300px;height:46px;font-size:10px;background:white;border-color:#E91E8C;">
+                MUSEU DO ATLETA E LABORATÓRIOS</div>
+
+            <!--ESPORTES-->
+            <div class="circ" style="width:34px;height:34px;top:2px;left:573px;font-size:12px;">P4</div>
+            <div class="circ" style="width:34px;height:34px;top:2px;left:1107px;font-size:12px;">P5</div>
+
+            <div class="blk" style="top:42px;left:210px;width:76px;height:46px;">SALA DE DANÇA</div>
+            <div class="blk" style="top:92px;left:210px;width:76px;height:46px;">ACADEMIA</div>
+            <div class="blk" style="top:142px;left:130px;width:76px;height:46px;">PISCINA</div>
+            <div class="blk" style="top:142px;left:210px;width:76px;height:46px;">TI</div>
+
+            <div class="blk" style="top:92px;left:414px;width:120px;height:46px;font-size:11px;">PORTARIA PRINCIPAL
+            </div>
+            <div class="blk" style="top:92px;left:310px;width:100px;height:46px;font-size:11px;">MANTENEDORA</div>
+            <div class="blk" style="top:142px;left:310px;width:100px;height:46px;font-size:10px;">RECURSOS HUMANOS
+            </div>
+
+            <div class="blk" style="top:42px;left:658px;width:130px;height:60px;font-size:11px;">RECEPÇÃO E MATRÍCULA
+            </div>
+            <div class="blk" style="top:142px;left:780px;width:180px;height:60px;">QUADRA POLIESPORTIVA</div>
+            <div class="blk" style="top:142px;left:964px;width:100px;height:60px;">VESTIÁRIO</div>
+
+            <div class="circ" style="width:50px;height:50px;top:330px;left:1100px;font-size:20px;border-width:4px;">E
+            </div>
+            <div class="blk" style="top:698px;right:0px;width:120px;height:28px;font-size:10px;border-color:black;">
+                ENTRADA DE VANS</div>
+        </div>
     </div>
 </div>

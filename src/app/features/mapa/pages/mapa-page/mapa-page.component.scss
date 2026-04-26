@@ -16,3 +16,34 @@
     height: 0rem !important; 
     border: none !important; 
 }
+
+  .map-area { position: relative; width: 100%; height: 760px; }
+  .blk {
+    position: absolute; border: 2.5px solid black; background: white;
+    font-weight: 700; font-size: 11px; text-align: center;
+    display: flex; align-items: center; justify-content: center;
+    padding: 4px 6px; line-height: 1.3;
+  }
+  .circ {
+    position: absolute; border-radius: 50%; border: 3px solid black;
+    background: white; display: flex; align-items: center;
+    justify-content: center; font-weight: 900;
+  }
+  .street-label {
+    font-size: 12px; font-weight: 600; color: #6b7280;
+    letter-spacing: 0.12em; position: absolute;
+  }
+  /* Icon node circles */
+  .inode {
+    position: absolute; border-radius: 50%; border: 2.5px solid black;
+    display: flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px;
+  }
+  .inode i { font-size: 13px; line-height: 1; }
+  .inode-white { background: white;   color: #111; }
+  .inode-dark-blue { background: #11285F; color: white; border-color: #11285F; }
+  .inode-red { background: #b91c1c; color: white; border-color: #b91c1c; }
+  .inode-green { background: #22c55e; color: white; border-color: #22c55e; }
+  .inode-light-blue { background: #3B82F6; color: white; border-color: #3B82F6; }
+  .inode-purple { background: #582aa8; color: white; border-color: #582aa8; }
+  .inode-pink { background: #E91E8C; color: white; border-color: #E91E8C; }
