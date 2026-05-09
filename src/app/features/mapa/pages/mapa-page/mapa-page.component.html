@@ -10,18 +10,23 @@
         <div class="mb-5">
             <label class="form-label mb-2">Origem</label>
             <ng-select class="w-full" [items]="locaisMapa" bindLabel="nome" bindValue="id" groupBy="grupo"
-                placeholder="Selecione um local..." [(ngModel)]="localSelecionado" [searchable]="true"
-                [clearable]="false">
+                placeholder="Selecione um local..." [(ngModel)]="origem" [searchable]="true"
+                [clearable]="true">
             </ng-select>
         </div>
 
-        <div class="mb-0">
+        <div class="mb-6">
             <label class="form-label mb-2">Destino</label>
             <ng-select class="w-full" [items]="locaisMapa" bindLabel="nome" bindValue="id" groupBy="grupo"
-                placeholder="Selecione um local..." [(ngModel)]="localSelecionado" [searchable]="true"
-                [clearable]="false">
+                placeholder="Selecione um local..." [(ngModel)]="destino" [searchable]="true"
+                [clearable]="true">
             </ng-select>
         </div>
+
+        <button class="btn btn-primary w-full" (click)="gerarInstrucoes()">
+            <i class="ki-outline ki-directbox-send me-2"></i>
+            Gerar Instruções
+        </button>
     </div>
 </div>
 
@@ -34,133 +39,22 @@
     </div>
 
     <div class="card-body p-6">
-        <label class="form-label">Selecione origem e destino para ver as instruções passo a passo.</label>
-    </div>
-</div>
 
-<div class="card h-full mt-6">
-    <div class="card-header">
-        <h3 class="card-title fs-5 fw-bold mb-0">
-            <i class="ki-outline ki-abstract-29"></i>
-            Legenda
-        </h3>
-    </div>
-
-    <div class="card-body p-6">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px;">
-
-            <!-- Coluna 1 -->
-            <div class="flex items-center gap-3 mb-3">
-                <div class="inode inode-white" style="position: relative;">
-                    <i class="ki-solid ki-coffee"></i>
-                </div>
-                <span class="form-label text-gray-900">Cafeteria</span>
-            </div>
-
-            <!-- Coluna 2 - Item 1 -->
-            <div class="flex items-center gap-3 mb-3">
-                <div class="inode inode-dark-blue" style="position: relative;">
-                    <span class="text-sm">B1</span>
-                </div>
-                <span class="form-label text-gray-900">Bloco 1</span>
-            </div>
-
-            <div class="flex items-center gap-3 mb-3">
-                <div class="inode inode-white" style="position: relative;">
-                    <i class="ki-solid ki-chart-simple-2"></i>
-                </div>
-                <span class="form-label text-gray-900">Escada</span>
-            </div>
-
-            <!-- Coluna 2 - Item 2 -->
-            <div class="flex items-center gap-3 mb-3">
-                <div class="inode inode-red" style="position: relative;">
-                    <span class="text-sm">B2</span>
-                </div>
-                <span class="form-label text-gray-900">Bloco 2</span>
-            </div>
-
-            <div class="flex items-center gap-3 mb-3">
-                <div class="inode inode-white" style="position: relative;">
-                    <i class="ki-solid ki-pulse"></i>
-                </div>
-                <span class="form-label text-gray-900">Ambulatório</span>
-            </div>
-
-            <!-- Coluna 2 vazia (célula placeholder) -->
-            <div class="flex items-center gap-3 mb-3">
-                <div class="inode inode-green" style="position: relative;">
-                    <span class="text-sm">B3</span>
-                </div>
-                <span class="form-label text-gray-900">Bloco 3</span>
-            </div>
-
-            <div class="flex items-center gap-3 mb-3">
-                <div class="inode inode-white" style="position: relative;">
-                    <span class="text-sm">P1</span>
-                </div>
-                <span class="form-label text-gray-900">Portaria 1</span>
-            </div>
-
-            <div class="flex items-center gap-3 mb-3">
-                <div class="inode inode-light-blue" style="position: relative;">
-                    <span class="text-sm">B4</span>
-                </div>
-                <span class="form-label text-gray-900">Bloco 4</span>
-            </div>
-
-            <div class="flex items-center gap-3 mb-3">
-                <div class="inode inode-white" style="position: relative;">
-                    <span class="text-sm">P2</span>
-                </div>
-                <span class="form-label text-gray-900">Portaria 2</span>
-            </div>
-
-            <div class="flex items-center gap-3 mb-3">
-                <div class="inode inode-purple" style="position: relative;">
-                    <span class="text-sm">B5</span>
-                </div>
-                <span class="form-label text-gray-900">Bloco 5</span>
-            </div>
-
-            <div class="flex items-center gap-3 mb-3">
-                <div class="inode inode-white" style="position: relative;">
-                    <span class="text-sm">P3</span>
-                </div>
-                <span class="form-label text-gray-900">Portaria 3</span>
-            </div>
-
-            <div class="flex items-center gap-3 mb-3">
-                <div class="inode inode-pink" style="position: relative;">
-                    <span class="text-sm">B6</span>
-                </div>
-                <span class="form-label text-gray-900">Bloco 6</span>
-            </div>
-
-            <div class="flex items-center gap-3 mb-3">
-                <div class="inode inode-white" style="position: relative;">
-                    <span class="text-sm">P4</span>
-                </div>
-                <span class="form-label text-gray-900">Portaria 4</span>
-            </div>
-
-            <div class="flex items-center gap-3 mb-3">
-                <div class="inode inode-white" style="position: relative;">
-                    <span class="text-sm">E</span>
-                </div>
-                <span class="form-label text-gray-900">Estacionamento</span>
-            </div>
-
-            <div class="flex items-center gap-3 mb-3">
-                <div class="inode inode-white" style="position: relative;">
-                    <span class="text-sm">P5</span>
-                </div>
-                <span class="form-label text-gray-900">Portaria 5</span>
-            </div>
-
-            <div></div>
-
+        <div *ngIf="erroNavegacao" class="alert alert-danger d-flex align-items-center gap-3 p-4 mb-0">
+            <i class="ki-outline ki-information-2 fs-2 text-danger"></i>
+            <span class="form-label mb-0">{{ erroNavegacao }}</span>
         </div>
+
+        <div *ngIf="instrucoes.length === 0 && !erroNavegacao">
+            <label class="form-label text-gray-500">Selecione origem e destino para ver as instruções passo a passo.</label>
+        </div>
+
+        <ol *ngIf="instrucoes.length > 0" class="ps-4 mb-0" style="line-height: 1.8;">
+            <li *ngFor="let passo of instrucoes" class="form-label mb-2 text-gray-800">
+                {{ passo }}
+            </li>
+        </ol>
+
     </div>
 </div>
 
@@ -175,11 +69,12 @@
                 <line x1="1050" y1="255" x2="1125" y2="255" stroke="black" stroke-width="2.5" />
 
                 <!-- Linhas B1 (P1) -->
-                <line x1="30" y1="500" x2="250" y2="500" stroke="black" stroke-width="2.5" />
+                <line x1="30" y1="500" x2="304" y2="500" stroke="black" stroke-width="2.5" />
                 <line x1="80" y1="470" x2="100" y2="470" stroke="black" stroke-width="2.5" />
                 <line x1="80" y1="525" x2="100" y2="525" stroke="black" stroke-width="2.5" />
                 <line x1="80" y1="564" x2="100" y2="564" stroke="black" stroke-width="2.5" />
                 <line x1="75" y1="480" x2="75" y2="520" stroke="black" stroke-width="2.5" />
+                <line x1="250" y1="520" x2="250" y2="600" stroke="black" stroke-width="2.5" />
 
                 <!-- Linha B1 salas -> P2 -->
                 <line x1="167" y1="560" x2="167" y2="620" stroke="black" stroke-width="2.5" />
@@ -390,6 +285,132 @@
             </div>
             <div class="blk" style="top:698px;left:1040px;width:120px;height:28px;font-size:10px;border-color:black;">
                 ENTRADA DE VANS</div>
+        </div>
+    </div>
+</div>
+
+<div class="card h-full mt-6">
+    <div class="card-header">
+        <h3 class="card-title fs-5 fw-bold mb-0">
+            <i class="ki-outline ki-abstract-29"></i>
+            Legenda
+        </h3>
+    </div>
+
+    <div class="card-body p-6">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px;">
+
+            <!-- Coluna 1 -->
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <i class="ki-solid ki-coffee"></i>
+                </div>
+                <span class="form-label text-gray-900">Cafeteria</span>
+            </div>
+
+            <!-- Coluna 2 - Item 1 -->
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-dark-blue" style="position: relative;">
+                    <span class="text-sm">B1</span>
+                </div>
+                <span class="form-label text-gray-900">Bloco 1</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <i class="ki-solid ki-chart-simple-2"></i>
+                </div>
+                <span class="form-label text-gray-900">Escada</span>
+            </div>
+
+            <!-- Coluna 2 - Item 2 -->
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-red" style="position: relative;">
+                    <span class="text-sm">B2</span>
+                </div>
+                <span class="form-label text-gray-900">Bloco 2</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <i class="ki-solid ki-pulse"></i>
+                </div>
+                <span class="form-label text-gray-900">Ambulatório</span>
+            </div>
+
+            <!-- Coluna 2 vazia (célula placeholder) -->
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-green" style="position: relative;">
+                    <span class="text-sm">B3</span>
+                </div>
+                <span class="form-label text-gray-900">Bloco 3</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <span class="text-sm">P1</span>
+                </div>
+                <span class="form-label text-gray-900">Portaria 1</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-light-blue" style="position: relative;">
+                    <span class="text-sm">B4</span>
+                </div>
+                <span class="form-label text-gray-900">Bloco 4</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <span class="text-sm">P2</span>
+                </div>
+                <span class="form-label text-gray-900">Portaria 2</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-purple" style="position: relative;">
+                    <span class="text-sm">B5</span>
+                </div>
+                <span class="form-label text-gray-900">Bloco 5</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <span class="text-sm">P3</span>
+                </div>
+                <span class="form-label text-gray-900">Portaria 3</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-pink" style="position: relative;">
+                    <span class="text-sm">B6</span>
+                </div>
+                <span class="form-label text-gray-900">Bloco 6</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <span class="text-sm">P4</span>
+                </div>
+                <span class="form-label text-gray-900">Portaria 4</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <span class="text-sm">E</span>
+                </div>
+                <span class="form-label text-gray-900">Estacionamento</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+                <div class="inode inode-white" style="position: relative;">
+                    <span class="text-sm">P5</span>
+                </div>
+                <span class="form-label text-gray-900">Portaria 5</span>
+            </div>
+
+            <div></div>
+
         </div>
     </div>
 </div>
