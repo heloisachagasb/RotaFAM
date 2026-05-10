@@ -10,16 +10,16 @@
         <div class="mb-5">
             <label class="form-label mb-2">Origem</label>
             <ng-select class="w-full" [items]="locaisMapa" bindLabel="nome" bindValue="id" groupBy="grupo"
-                placeholder="Selecione um local..." [(ngModel)]="origem" [searchable]="true"
-                [clearable]="true">
+                [placeholder]="origem ? '' : 'Selecione um local...'" [(ngModel)]="origem" [searchable]="true"
+                [clearable]="false">
             </ng-select>
         </div>
 
         <div class="mb-6">
             <label class="form-label mb-2">Destino</label>
             <ng-select class="w-full" [items]="locaisMapa" bindLabel="nome" bindValue="id" groupBy="grupo"
-                placeholder="Selecione um local..." [(ngModel)]="destino" [searchable]="true"
-                [clearable]="true">
+                [placeholder]="destino ? '' : 'Selecione um local...'" [(ngModel)]="destino" [searchable]="true"
+                [clearable]="false">
             </ng-select>
         </div>
 
@@ -285,6 +285,16 @@
             </div>
             <div class="blk" style="top:698px;left:1040px;width:120px;height:28px;font-size:10px;border-color:black;">
                 ENTRADA DE VANS</div>
+
+            <!-- SVG da rota — renderizado após os blocos para ficar acima deles -->
+            <svg *ngIf="rotaPolyline.length > 1"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:100;"
+                xmlns="http://www.w3.org/2000/svg">
+                <polyline
+                  [attr.points]="rotaPolylineStr"
+                  fill="none" stroke="#F97316" stroke-width="5" opacity="0.7"
+                  stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
         </div>
     </div>
 </div>

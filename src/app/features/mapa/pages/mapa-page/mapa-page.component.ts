@@ -18,7 +18,11 @@ export class MapaPageComponent implements OnInit {
   destino: string = '';
   instrucoes: string[] = [];
   erroNavegacao: string = '';
-  segmentosSVG: { x1: number; y1: number; x2: number; y2: number }[] = [];
+  rotaPolyline: [number, number][] = [];
+
+  get rotaPolylineStr(): string {
+    return this.rotaPolyline.map(([x, y]) => `${x},${y}`).join(' ');
+  }
 
   ngOnInit(): void {}
 
@@ -29,7 +33,7 @@ export class MapaPageComponent implements OnInit {
 
   gerarInstrucoes(): void {
     this.instrucoes = [];
-    this.segmentosSVG = [];
+    this.rotaPolyline = [];
     this.erroNavegacao = '';
 
     if (!this.origem || !this.destino) {
@@ -50,7 +54,7 @@ export class MapaPageComponent implements OnInit {
     }
 
     this.instrucoes = this.construirInstrucoes(caminho);
-    this.segmentosSVG = this.calcularSegmentosSVG(caminho);
+    this.rotaPolyline = this.calcularPolyline(caminho);
   }
 
   private readonly nodePoints: Record<string, [number, number]> = {
@@ -97,15 +101,158 @@ export class MapaPageComponent implements OnInit {
     vestiario:            [1014,175],
   };
 
-  private calcularSegmentosSVG(caminho: string[]): { x1: number; y1: number; x2: number; y2: number }[] {
-    const segs: { x1: number; y1: number; x2: number; y2: number }[] = [];
+  private calcularPolyline(caminho: string[]): [number, number][] {
+    if (caminho.length < 2) return [];
+    const pts: [number, number][] = [];
     for (let i = 0; i < caminho.length - 1; i++) {
-      const from = this.nodePoints[caminho[i]];
-      const to   = this.nodePoints[caminho[i + 1]];
-      if (from && to) segs.push({ x1: from[0], y1: from[1], x2: to[0], y2: to[1] });
+      const key = `${caminho[i]}→${caminho[i + 1]}`;
+      const path = this.edgePaths[key];
+      if (path?.length) {
+        pts.length === 0 ? pts.push(...path) : pts.push(...path.slice(1));
+      } else {
+        const from = this.nodePoints[caminho[i]];
+        const to   = this.nodePoints[caminho[i + 1]];
+        if (from && to) {
+          if (pts.length === 0) pts.push(from);
+          pts.push(to);
+        }
+      }
     }
-    return segs;
+    return pts;
   }
+
+  private readonly edgePaths: Record<string, [number, number][]> = {
+    // === P1 / B1 MAIN CORRIDOR (y=500) ===
+    'portaria_p1→b1_salas':              [[47,500],[75,500]],
+    'portaria_p1→b1_convivencia':        [[47,500],[240,500]],
+    'portaria_p1→portaria_p2':           [[47,500],[167,500],[167,617]],
+    'b1_salas→portaria_p1':              [[75,500],[47,500]],
+    'b1_salas→b1_convivencia':           [[75,500],[240,500]],
+    'b1_salas→b4_salas':                 [[75,500],[303,500],[303,340],[264,340]],
+    'b1_convivencia→portaria_p1':        [[240,500],[47,500]],
+    'b1_convivencia→b1_salas':           [[240,500],[75,500]],
+    'b1_convivencia→b1_nicom':           [[240,500],[303,500],[303,591]],
+    'b1_convivencia→b5_praca_academica': [[240,500],[303,500],[303,420],[713,420]],
+    'b1_convivencia→b6_professores':     [[240,500],[303,500],[303,470],[388,469]],
+    // === NICOM / P2 / ADMIN CORRIDOR ===
+    'b1_nicom→b1_convivencia':           [[303,591],[303,500],[240,500]],
+    'b1_nicom→b1_direcao':               [[303,591],[321,591],[351,591],[351,676]],
+    'b1_nicom→portaria_p2':              [[303,591],[303,500],[167,500],[167,617]],
+    'b1_nicom→b2_praticas_juridicas':    [[303,591],[303,559],[412,559]],
+    'portaria_p2→portaria_p1':           [[167,617],[167,500],[47,500]],
+    'portaria_p2→b1_nicom':              [[167,617],[167,500],[303,500],[303,591]],
+    'portaria_p2→b1_direcao':            [[167,617],[167,500],[303,500],[303,591],[321,591],[351,591],[351,676]],
+    'b1_direcao→b1_nicom':               [[351,676],[351,591],[321,591],[303,591]],
+    'b1_direcao→b1_ead':                 [[351,676],[437,676]],
+    'b1_direcao→portaria_p2':            [[351,676],[351,591],[321,591],[303,591],[303,500],[167,500],[167,617]],
+    'b1_ead→b1_direcao':                 [[437,676],[351,676]],
+    'b1_ead→b1_cpa':                     [[437,676],[516,676]],
+    'b1_cpa→b1_ead':                     [[516,676],[437,676]],
+    'b1_cpa→b1_diploma':                 [[516,676],[593,676]],
+    'b1_diploma→b1_cpa':                 [[593,676],[516,676]],
+    'b1_diploma→b2_praticas_juridicas':  [[593,676],[593,616],[412,616]],
+    // === BLOCO 2 ===
+    'b2_praticas_juridicas→b1_nicom':          [[412,559],[303,559],[303,591]],
+    'b2_praticas_juridicas→b1_diploma':        [[412,616],[593,616],[593,676]],
+    'b2_praticas_juridicas→b2_tribunal_juri':  [[412,559],[412,616]],
+    'b2_praticas_juridicas→b2_cafeteria':      [[412,559],[895,570]],
+    'b2_tribunal_juri→b2_praticas_juridicas':  [[412,616],[412,559]],
+    'b2_tribunal_juri→portaria_p3':            [[412,616],[930,616],[930,717]],
+    'b2_cafeteria→b2_praticas_juridicas':      [[895,570],[412,559]],
+    'b2_cafeteria→b6_museu':                   [[895,570],[895,469],[941,469]],
+    'portaria_p3→b2_tribunal_juri':            [[930,717],[930,616],[412,616]],
+    'portaria_p3→b2_praticas_juridicas':       [[930,717],[930,559],[412,559]],
+    // === BLOCO 4 / BLOCO 3 ===
+    'b4_salas→b1_salas':       [[264,340],[303,340],[303,500],[75,500]],
+    'b4_salas→b3_salas':       [[264,340],[303,340],[303,255],[590,255]],
+    'b4_salas→b3_ambulatorio': [[264,340],[303,340],[303,255],[364,255]],
+    'b3_salas→b4_salas':       [[590,255],[303,255],[303,340],[264,340]],
+    'b3_salas→b3_ambulatorio': [[590,255],[364,255]],
+    'b3_salas→b3_coord_labs':  [[590,255],[475,255]],
+    'b3_salas→portaria_p4':    [[590,255],[590,19]],
+    'b3_salas→b5_salas':       [[590,255],[303,255],[303,380],[340,380],[480,380]],
+    'b3_salas→estacionamento': [[590,255],[1050,255],[1125,255],[1125,340]],
+    'b3_ambulatorio→b4_salas': [[364,255],[303,255],[303,340],[264,340]],
+    'b3_ambulatorio→b3_salas': [[364,255],[590,255]],
+    'b3_coord_labs→b3_salas':  [[475,255],[590,255]],
+    // === PORTARIA P4 / ÁREA ESPORTIVA ===
+    'portaria_p4→b3_salas':           [[590,19],[590,255]],
+    'portaria_p4→portaria_principal': [[590,19],[590,115],[474,115]],
+    'portaria_p4→sala_danca':         [[590,19],[280,115],[280,65],[248,65]],
+    'portaria_principal→portaria_p4': [[474,115],[590,115],[590,19]],
+    'portaria_principal→mantenedora': [[474,115],[360,115]],
+    'portaria_principal→recursos_humanos': [[474,115],[360,165]],
+    'mantenedora→portaria_principal': [[360,115],[474,115]],
+    'mantenedora→recursos_humanos':   [[360,115],[360,165]],
+    'recursos_humanos→portaria_principal': [[360,165],[474,115]],
+    'recursos_humanos→mantenedora':        [[360,165],[360,115]],
+    'sala_danca→portaria_p4': [[248,65],[280,65],[280,115],[590,115],[590,19]],
+    'sala_danca→academia':    [[248,65],[248,115]],
+    'academia→sala_danca':    [[248,115],[248,65]],
+    'academia→piscina':       [[248,115],[190,165]],
+    'academia→ti':            [[248,115],[248,165]],
+    'piscina→academia':       [[190,165],[248,115]],
+    'ti→academia':            [[248,165],[248,115]],
+    // === BLOCO 5/6 — UPPER ROW (y=420) ===
+    'b5_salas→b3_salas':           [[480,380],[340,380],[303,380],[303,255],[590,255]],
+    'b5_salas→b5_sala_vip':        [[480,380],[340,380],[340,420],[388,420]],
+    'b5_salas→b5_secretaria':      [[480,380],[340,380],[340,420],[490,420]],
+    'b5_salas→b5_cfa':             [[480,380],[340,380],[340,420],[590,420]],
+    'b5_salas→b5_praca_academica': [[480,380],[340,380],[340,420],[713,420]],
+    'b5_salas→b6_professores':     [[480,380],[340,380],[340,470],[388,469]],
+    'b5_sala_vip→b5_salas':        [[388,420],[340,420],[340,380],[480,380]],
+    'b5_sala_vip→b5_secretaria':   [[388,420],[490,420]],
+    'b5_sala_vip→b6_professores':  [[388,420],[388,469]],
+    'b5_secretaria→b5_salas':      [[490,420],[340,420],[340,380],[480,380]],
+    'b5_secretaria→b5_sala_vip':   [[490,420],[388,420]],
+    'b5_secretaria→b5_cfa':        [[490,420],[590,420]],
+    'b5_secretaria→b6_coordenadores': [[490,420],[490,469]],
+    'b5_cfa→b5_salas':             [[590,420],[340,420],[340,380],[480,380]],
+    'b5_cfa→b5_secretaria':        [[590,420],[490,420]],
+    'b5_cfa→b5_praca_academica':   [[590,420],[713,420]],
+    'b5_cfa→b6_dep_social':        [[590,420],[590,469]],
+    'b5_praca_academica→b5_salas': [[713,420],[340,420],[340,380],[480,380]],
+    'b5_praca_academica→b5_cfa':   [[713,420],[590,420]],
+    'b5_praca_academica→b1_convivencia': [[713,420],[303,420],[303,500],[240,500]],
+    'b5_praca_academica→b6_biblioteca':  [[713,420],[865,420]],
+    'b5_praca_academica→b6_auditorio':   [[713,420],[1016,420]],
+    'b6_biblioteca→b5_praca_academica':  [[865,420],[713,420]],
+    'b6_biblioteca→b6_auditorio':        [[865,420],[1016,420]],
+    'b6_biblioteca→b6_museu':            [[865,420],[865,469],[941,469]],
+    'b6_auditorio→b5_praca_academica':   [[1016,420],[713,420]],
+    'b6_auditorio→b6_biblioteca':        [[1016,420],[865,420]],
+    'b6_auditorio→b6_museu':             [[1016,420],[1016,469],[941,469]],
+    'b6_auditorio→estacionamento':       [[1016,420],[1125,420],[1125,340]],
+    // === BLOCO 6 — LOWER ROW (y=469) ===
+    'b6_professores→b1_convivencia':   [[388,469],[303,469],[303,500],[240,500]],
+    'b6_professores→b5_salas':         [[388,469],[340,469],[340,380],[480,380]],
+    'b6_professores→b5_sala_vip':      [[388,469],[388,420]],
+    'b6_professores→b6_coordenadores': [[388,469],[490,469]],
+    'b6_coordenadores→b6_professores': [[490,469],[388,469]],
+    'b6_coordenadores→b5_secretaria':  [[490,469],[490,420]],
+    'b6_coordenadores→b6_dep_social':  [[490,469],[590,469]],
+    'b6_coordenadores→b6_museu':       [[490,469],[941,469]],
+    'b6_dep_social→b6_coordenadores':  [[590,469],[490,469]],
+    'b6_dep_social→b5_cfa':            [[590,469],[590,420]],
+    'b6_dep_social→b5_salas':          [[590,469],[340,469],[340,380],[480,380]],
+    'b6_museu→b6_biblioteca':          [[941,469],[865,469],[865,420]],
+    'b6_museu→b6_auditorio':           [[941,469],[1016,469],[1016,420]],
+    'b6_museu→b6_coordenadores':       [[941,469],[490,469]],
+    'b6_museu→b2_cafeteria':           [[941,469],[895,469],[895,570]],
+    'b6_museu→estacionamento':         [[941,469],[1125,469],[1125,340]],
+    // === ESTACIONAMENTO / P5 ===
+    'estacionamento→portaria_p5':  [[1125,340],[1125,19]],
+    'estacionamento→b6_auditorio': [[1125,340],[1125,420],[1016,420]],
+    'estacionamento→b6_museu':     [[1125,340],[1125,469],[941,469]],
+    'estacionamento→b3_salas':     [[1125,340],[1125,255],[1050,255],[590,255]],
+    'portaria_p5→estacionamento':  [[1125,19],[1125,340]],
+    'portaria_p5→recepcao_matricula': [[1125,19],[660,75]],
+    'recepcao_matricula→portaria_p5':          [[660,75],[1125,75],[1125,19]],
+    'recepcao_matricula→quadra_poliesportiva': [[660,75],[870,175]],
+    'quadra_poliesportiva→recepcao_matricula': [[870,175],[660,75]],
+    'quadra_poliesportiva→vestiario':          [[870,175],[1014,175]],
+    'vestiario→quadra_poliesportiva':          [[1014,175],[870,175]],
+  };
 
   private bfs(inicio: string, fim: string): string[] {
     if (!this.grafo[inicio] || !this.grafo[fim]) return [];
@@ -255,8 +402,8 @@ export class MapaPageComponent implements OnInit {
   };
 
   private readonly transicoes: Record<string, string> = {
-    'portaria_p1→b1_salas': 'Siga em frente pelo corredor principal do Bloco 1 — as salas de aula ficam à sua esquerda.',
-    'portaria_p1→b1_convivencia': 'Siga em frente pelo corredor principal do Bloco 1 — a Área de Convivência estará à sua direita.',
+    'portaria_p1→b1_salas': 'Suba uma das escadas do Bloco 1 — as salas de aula ficam à sua esquerda e direita.',
+    'portaria_p1→b1_convivencia': 'Siga em frente pelo corredor principal do Bloco 1 — a Área de Convivência estará à sua direita e esquerda.',
     'portaria_p1→portaria_p2': 'Siga pelo lado externo do prédio à esquerda até a Portaria 2.',
     'portaria_p2→portaria_p1': 'Siga pelo lado externo do prédio à direita até a Portaria 1.',
     'portaria_p2→b1_nicom': 'Entre pela Portaria 2 e siga em frente pelo corredor — o NICOM está logo à frente.',
