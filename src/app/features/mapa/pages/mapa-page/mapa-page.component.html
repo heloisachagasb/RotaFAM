@@ -106,12 +106,13 @@
                 <!-- Linhas NICOM -> B6/B5/B4 -->
                 <line x1="303" y1="340" x2="303" y2="596" stroke="black" stroke-width="2.5" />
                 <line x1="280" y1="340" x2="303" y2="340" stroke="black" stroke-width="2.5" />
-                <line x1="303" y1="380" x2="340" y2="380" stroke="black" stroke-width="2.5" />
-                <line x1="303" y1="420" x2="340" y2="420" stroke="black" stroke-width="2.5" />
-                <line x1="303" y1="470" x2="340" y2="470" stroke="black" stroke-width="2.5" />
+                <line x1="303" y1="380" x2="750" y2="380" stroke="black" stroke-width="2.5" />
+                <line x1="303" y1="420" x2="970" y2="420" stroke="black" stroke-width="2.5" />
+                <line x1="303" y1="470" x2="970" y2="470" stroke="black" stroke-width="2.5" />
                 <line x1="383" y1="616" x2="412" y2="616" stroke="black" stroke-width="2.5" />
                 <line x1="384" y1="570" x2="384" y2="615" stroke="black" stroke-width="2.5" />
                 <line x1="302" y1="559" x2="412" y2="559" stroke="black" stroke-width="2.5" />
+                <line x1="310" y1="680" x2="570" y2="680" stroke="black" stroke-width="2.5" />
 
                 <!-- Esportes -->
                 <line x1="590" y1="20" x2="590" y2="254" stroke="black" stroke-width="2.5" />
@@ -285,16 +286,6 @@
             </div>
             <div class="blk" style="top:698px;left:1040px;width:120px;height:28px;font-size:10px;border-color:black;">
                 ENTRADA DE VANS</div>
-
-            <!-- SVG da rota — renderizado após os blocos para ficar acima deles -->
-            <svg *ngIf="rotaPolyline.length > 1"
-                style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:100;"
-                xmlns="http://www.w3.org/2000/svg">
-                <polyline
-                  [attr.points]="rotaPolylineStr"
-                  fill="none" stroke="#F97316" stroke-width="5" opacity="0.7"
-                  stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
         </div>
     </div>
 </div>
